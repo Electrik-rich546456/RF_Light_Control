@@ -34,6 +34,8 @@ def lights(name, *num):
             elif(data['dps']['20'] == False):
                 #print("its off Turing on")
                 d.turn_on()
+            d.set_brightness_percentage(brightness=50)
+            d.set_colourtemp_percentage(50)
         if n == 3:
             if(data['dps']['20'] == True):
                 #print("its on Turning off")

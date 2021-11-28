@@ -12,9 +12,9 @@ import time_ex
 rfdevice = RFDevice(gpio=27)
 rfdevice.enable_rx()
 
-#Time range settings between 6am - 10pm 
+#Time range settings between 6 am - 7 pm 
 start = 6
-end = 22
+end = 19
 ###########
 
 
@@ -46,9 +46,9 @@ class MultipleLightButton(ButtonDevice):
             #print(self.button_name, "short press")
             if time_ex.day_check(start,  end):
                 #my_roomctrl.living()
-                my_roomctrl.living_br()
+                my_roomctrl.living_br() # Lights at 100 
             else:
-                my_roomctrl.living()
+                my_roomctrl.living() # Lights at 50 
 #        print(type(self.button_name))
 #        <class 'str'>        
     def long_rolling(self):
