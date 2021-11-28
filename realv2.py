@@ -12,6 +12,12 @@ import time_ex
 rfdevice = RFDevice(gpio=27)
 rfdevice.enable_rx()
 
+#Time range settings between 6am - 10pm 
+start = 6
+end = 22
+###########
+
+
 # cleanup on exit
 def signal_handler(sig, frame):
     rfdevice.cleanup()
@@ -38,7 +44,7 @@ class MultipleLightButton(ButtonDevice):
         #print( buttons[id])
         if (buttons[id]) == ("Hallway" or "Entrance"):
             #print(self.button_name, "short press")
-            if time_ex.day_check():
+            if time_ex.day_check(start,  end):
                 my_roomctrl.living()
                 my_roomctrl.living_br()
             else:
