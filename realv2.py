@@ -45,7 +45,7 @@ class MultipleLightButton(ButtonDevice):
         if (buttons[id]) == ("Hallway" or "Entrance"):
             #print(self.button_name, "short press")
             if time_ex.day_check(start,  end):
-                my_roomctrl.living()
+                #my_roomctrl.living()
                 my_roomctrl.living_br()
             else:
                 my_roomctrl.living()

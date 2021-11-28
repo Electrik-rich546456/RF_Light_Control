@@ -12,7 +12,7 @@ counter = 0
 def lights(name, *num):
 #    1 = on/ off toggle
 #    2 = just off
-#    3 = Full Brightness
+#    3 = Full Brightness & on/ off toggle
 #    4 = Brightness and temp according to counter
 #    5 = Brightness only according to counter
 #    6 = Colour Tempature only according to counter
@@ -35,6 +35,12 @@ def lights(name, *num):
                 #print("its off Turing on")
                 d.turn_on()
         if n == 3:
+            if(data['dps']['20'] == True):
+                #print("its on Turning off")
+                d.turn_off()
+            elif(data['dps']['20'] == False):
+                #print("its off Turing on")
+                d.turn_on()
             d.set_brightness_percentage(brightness=100)
             d.set_colourtemp_percentage(100)
         if n == 4:
