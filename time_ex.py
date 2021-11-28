@@ -10,10 +10,10 @@ end = 17
 def day_check(start, end):
     hour = int(time.strftime("%H"))
     if hour >= start and hour <= end:
-        print("day time")
+        #print("day time")
         return True
     else:
-        print("night time")
+        #print("night time")
         return False
 
 day_check(start,  end)

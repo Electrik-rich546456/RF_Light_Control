@@ -7,6 +7,7 @@ from button_device import ButtonDevice
 import signal
 import sys
 import my_roomctrl
+import time_ex
 
 rfdevice = RFDevice(gpio=27)
 rfdevice.enable_rx()
@@ -37,7 +38,11 @@ class MultipleLightButton(ButtonDevice):
         #print( buttons[id])
         if (buttons[id]) == ("Hallway" or "Entrance"):
             #print(self.button_name, "short press")
-            my_roomctrl.living()
+            if time_ex.day_check():
+                my_roomctrl.living()
+                my_roomctrl.living_br()
+            else:
+                my_roomctrl.living()
 #        print(type(self.button_name))
 #        <class 'str'>        
     def long_rolling(self):

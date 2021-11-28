@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from threading import Thread
 import tinytuya
-import time
+#import time
 
 #import os
 import json
@@ -10,7 +10,13 @@ with open('snapshot.json') as json_file:
 
 counter = 0
 def lights(name, *num):
-    global counter
+#    1 = on/ off toggle
+#    2 = just off
+#    3 = Full Brightness
+#    4 = Brightness and temp according to counter
+#    5 = Brightness only according to counter
+#    6 = Colour Tempature only according to counter
+    global br_counter, col_counter
     for item in jdata["devices"]:
         if item["name"] == name:
             break
@@ -19,26 +25,26 @@ def lights(name, *num):
     d.set_socketPersistent(True)
     data = d.status()
     for n in num:
-        if n == 1:
-            if(data['dps']['20'] == True):
-                ##print("its on Turning off")
-                d.turn_off()
-            elif(data['dps']['20'] == False):
-                ##print("its off Turing on")
-                d.turn_on()
         if n == 2:
             d.turn_off()
+        if n == 1:
+            if(data['dps']['20'] == True):
+                #print("its on Turning off")
+                d.turn_off()
+            elif(data['dps']['20'] == False):
+                #print("its off Turing on")
+                d.turn_on()
         if n == 3:
             d.set_brightness_percentage(brightness=100)
             d.set_colourtemp_percentage(100)
         if n == 4:
             #print(counter)
-            d.set_brightness_percentage(counter)
-            d.set_colourtemp_percentage(counter)
-            time.sleep(1)
-            #print(counter)
-            if counter == 100:
-                counter = 0
+            d.set_brightness_percentage(br_counter)
+            d.set_colourtemp_percentage(br_counter)
+        if n == 5:
+            d.set_brightness_percentage(br_counter)            
+        if n == 6:
+            d.set_colourtemp_percentage(col_counter) 
 #-------------------------------------------------------------------------------
 def bed_lights(name, *num):
     global counter
@@ -90,11 +96,11 @@ def leo_br():
     counter += 10
     
 def living_br():
-    global counter
-    Thread(target = lights, args=('Light_1', 4)).start()
-    Thread(target = lights, args=('Light_2', 4)).start() #Living Room brightness
-    Thread(target = lights, args=('Light_3', 4)).start()
-    counter += 10
+    #global counter
+    Thread(target = lights, args=('Light_1', 3)).start()
+    Thread(target = lights, args=('Light_2', 3)).start() #Living Room brightness
+    Thread(target = lights, args=('Light_3', 3)).start()
+    #counter += 10
     #print(counter)
     
 def living_br2():
